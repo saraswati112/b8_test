@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <title>Library page</title>
+    </head>
+
+    <style>
+        .required:before {
+            content:" *";
+            color: red;
+        }
+    </style>
+
+    <body>
+        <h2>Library Application</h2><hr>
+        <form method="POST">
+            {% csrf_token %}
+            <label class="required">Name:- </label>
+                <input type="text" name="book_name" value="{{single_book.name}}" placeholder="Enter book name" required><br><br>
+            <label class="required">Quntity:- </label>
+                <input type="number" name="book_qty" value="{{single_book.qty}}" placeholder="Enter book quantity" required><br><br>
+            <label class="required">Price:- </label>
+                <input type="number" name="book_price" value="{{single_book.price}}" placeholder="Enter book price" required><br><br>
+            <label class="required">Author:- </label>
+                <input type="text" name="book_author" value="{{single_book.author}}" placeholder="Enter book author" required><br><br>
+
+            <label class="required">Is Published:- </label>
+
+            {% if single_book %}
+                {% if single_book.is_published == True %}
+                    Yes <input type="radio" name="book_is_pub" value="Yes" checked> | No <input type="radio" name="book_is_pub" value="No"><br><br>
+                {% else %}
+                    Yes <input type="radio" name="book_is_pub" value="Yes"> | No <input type="radio" name="book_is_pub" value="No" checked><br><br>
+                {% endif %}
+            {% else %}
+                Yes <input type="radio" name="book_is_pub" value="Yes"> | No <input type="radio" name="book_is_pub" value="No"><br><br>
+            {% endif %}
+
+            <input type="submit" value="Submit"><br>
+            
+            {% comment %} new one for dropdown menu {% endcomment %}
+            <label>Choose a car:</label>
+                <select name="cars" multiple>
+                    <option>Select</option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="mercedes">Mercedes</option>
+                    <option value="audi">Audi</option>
+                </select>
+
+            {% comment %} {% for book in all_books %}
+                {{book.id}} -- {{book.name}} -- {{book.price}} <br>
+            {% endfor %} {% endcomment %}
+        </form>
+
+    {% comment %} <a href="/books/">Show Books</a> {% endcomment %}
+    <a href="{% url 'all_books' %}">Show Books</a>
+
+
+    </body>
+</html>

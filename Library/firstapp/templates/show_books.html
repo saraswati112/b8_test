@@ -1,0 +1,53 @@
+<html>
+    <head>
+        <title>Book Details</title>
+    <head>
+
+    <style>
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>     
+
+    <body>
+        <table>
+            <tr>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>Book qty</th>
+                <th>Book Price</th>
+                <th>Book Author</th>
+                <th>Book Published</th>
+                <th>Actions</th>
+
+            </tr>
+            {% for book in all_books %}
+                
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.qty}}</td>
+                    <td>{{book.price}}</td>
+                    <td>{{book.author}}</td>
+                    <td>{{book.is_published}}</td>
+                    <td>
+                        <form action="{% url 'update_book' book.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Update">
+                        </form>
+
+                        <input type="submit" value="Delete">
+                    </td>
+                </tr>
+            {% endfor %}
+        </table><br>
+
+        <a href="{% url 'home_page' %}">Home Page</a>
+
+    </body>
+</html>
+
+
+
+
+
